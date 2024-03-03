@@ -8,7 +8,11 @@ require('dotenv').config();
 const axios = require('axios');
 const https = require('https');
 
-const jwtKey = "tokenKey"
+const jwtKey = process.env.JWT_RABBIT_SECRET
+console.log("jwtKey:", jwtKey);
+const now = Math.round(new Date().getTime()/1000);
+const exp = now + parseInt(process.env.JWT_EXP_DURATION_SECONDS);
+console.log("JWT will exp on:", new Date(exp * 1000));
 
 const app = express()
 app.use(bodyParser.json())
@@ -270,8 +274,11 @@ function getToken(appid, username) {
     //     _id: userid,
     //     username: userid
     // } // , email: userid + "@example.com" };
-    const now = Math.round(new Date().getTime()/1000);
-    const exp = now + 60 * 60 * 24 * 30 * 12 * 10 // 10 years
+    // const now = Math.round(new Date().getTime()/1000);
+    // const exp_duration = 60 * 60 * 24 * 30 * 12 * 10 // 10 years
+    // const exp = now + 60 * 60 * 24 * 30 * 12 * 10 // 10 years
+    // const exp = now + parseInt(process.env.JWT_EXP_DURATION_SECONDS);
+    // console.log("exp:", exp);
     let scope;
     let tiledesk_api_roles = "user"
     if (username === 'observer') {
@@ -394,19 +401,19 @@ function usersById(userid) {
 var port = process.env.PORT || 8002;
 console.log("Starting server on port", port)
 app.listen(port, () => {
-    console.log('OBSERVER TOKEN:\n\n', getToken('tilechat', 'observer'))
-    console.log('APIADMIN (CHATAPI) TOKEN:\n\n', getToken('tilechat', 'apiadmin'))
-    console.log('RABBIT ADMIN (WEB CONSOLE) TOKEN:\n\n', getToken('tilechat', 'admin'))
-    console.log("RABBIT USER (andrea.leo@frontiere21.it) TOKEN:\n\n", getToken('tilechat', 'andrea.leo@frontiere21.it'))
-    console.log("const user1 = ", getToken('tilechat', 'user1@chatserver.org'));
-    console.log("const user2 = ", getToken('tilechat', 'user2@chatserver.org'));
-    console.log("const user3 = ", getToken('tilechat', 'user3@chatserver.org'));
-    console.log("const user4 = ", getToken('tilechat', 'user4@chatserver.org'));
-    console.log("const user5 = ", getToken('tilechat', 'user5@chatserver.org'));
-    console.log("const user6 = ", getToken('tilechat', 'user6@chatserver.org'));
-    console.log("const user7 = ", getToken('tilechat', 'user7@chatserver.org'));
-    console.log("const user8 = ", getToken('tilechat', 'user8@chatserver.org'));
-    console.log("const user9 = ", getToken('tilechat', 'user9@chatserver.org'));
+    console.log('OBSERVER TOKEN:\n', getToken('tilechat', 'observer'))
+    console.log('APIADMIN (CHATAPI) TOKEN:\n', getToken('tilechat', 'apiadmin'))
+    console.log('RABBIT ADMIN (WEB CONSOLE) TOKEN:\n', getToken('tilechat', 'admin'))
+    // console.log("RABBIT USER (andrea.leo@frontiere21.it) TOKEN:\n\n", getToken('tilechat', 'andrea.leo@frontiere21.it'))
+    // console.log("const user1 = ", getToken('tilechat', 'user1@chatserver.org'));
+    // console.log("const user2 = ", getToken('tilechat', 'user2@chatserver.org'));
+    // console.log("const user3 = ", getToken('tilechat', 'user3@chatserver.org'));
+    // console.log("const user4 = ", getToken('tilechat', 'user4@chatserver.org'));
+    // console.log("const user5 = ", getToken('tilechat', 'user5@chatserver.org'));
+    // console.log("const user6 = ", getToken('tilechat', 'user6@chatserver.org'));
+    // console.log("const user7 = ", getToken('tilechat', 'user7@chatserver.org'));
+    // console.log("const user8 = ", getToken('tilechat', 'user8@chatserver.org'));
+    // console.log("const user9 = ", getToken('tilechat', 'user9@chatserver.org'));
 });
 
 
