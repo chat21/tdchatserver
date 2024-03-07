@@ -402,7 +402,7 @@ var port = process.env.PORT || 8002;
 console.log("Starting server on port", port)
 app.listen(port, () => {
     console.log('OBSERVER TOKEN:\n', getToken('tilechat', 'observer'))
-    console.log('APIADMIN (CHATAPI) TOKEN:\n', getToken('tilechat', 'apiadmin'))
+    console.log('CHAT21 HTTP SERVER TOKEN:\n', getToken('tilechat', 'apiadmin'))
     console.log('RABBIT ADMIN (WEB CONSOLE) TOKEN:\n', getToken('tilechat', 'admin'))
     // console.log("RABBIT USER (andrea.leo@frontiere21.it) TOKEN:\n\n", getToken('tilechat', 'andrea.leo@frontiere21.it'))
     // console.log("const user1 = ", getToken('tilechat', 'user1@chatserver.org'));
